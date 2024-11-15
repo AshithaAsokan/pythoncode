@@ -1,0 +1,14 @@
+<form method="POST" action="{% url 'addproduct' %}">
+    {% csrf_token %}
+    <label for="name">Product Name:</label>
+    <input type="text" name="name" id="name">
+    <label for="price">Price:</label>
+    <input type="text" name="price" id="price">
+    <label for="brand">Brand:</label>
+    <input type="text" name="brand" id="brand">
+    <label for="description">Description:</label>
+    <textarea name="description" id="description"></textarea>
+    <button type="submit">Add Product</button>
+    <a href="{% url 'home' %}" class="button">Go Back</a>
+    {{msg}}
+</form>

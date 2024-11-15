@@ -1,82 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Shop the latest products at unbeatable prices.">
-    <meta name="keywords" content="e-commerce, online shopping, buy products">
-    <title>E-commerce Store</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Home - ECommerce Site</title>
+   
 </head>
 <body>
+
     <header>
+        <h1>Welcome to Our E-Commerce Platform!</h1>
         <nav>
-            <div class="logo">
-                <h1>E-commerce Store</h1>
-            </div>
             <ul>
+                <!-- Links for both users and admins -->
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'signup' %}">Signup</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
+                
+                
                 <li><a href="{% url 'logout' %}">Logout</a></li>
-              
+
+                <!-- Links shown only to admin users (is_staff = True) -->
+                {% if user.is_staff %}
+                    <li><a href="{% url 'addproduct' %}">Add Product</a></li>
+                    
+                    <li><a href="{% url 'placeorder' %}">place order</a></li>
+                    <!-- Additional admin links can be added here -->
+                {% endif %}
             </ul>
         </nav>
     </header>
-    
-    <main>
-        <section class="banner">
-            <h2>Welcome to E-commerce Store</h2>
-            <p>Discover amazing products at unbeatable prices!</p>
-         
-        </section>
-        
-        <section class="featured-products">
-            <h2>Featured Products</h2>
-            <div class="product-grid">
-                <div class="product-item">
-                    <img src="path/to/image1.jpg" alt="Product 1">
-                    <h3>Product 1</h3>
-                    <p>$29.99</p>
-                    
-                </div>
-                <div class="product-item">
-                    <img src="path/to/image2.jpg" alt="Product 2">
-                    <h3>Product 2</h3>
-                    <p>$39.99</p>
-                    
-                </div>
-                <div class="product-item">
-                    <img src="path/to/image3.jpg" alt="Product 3">
-                    <h3>Product 3</h3>
-                    <p>$49.99</p>
-                   
-                </div>
-                <div class="product-item">
-                    <img src="path/to/image4.jpg" alt="Product 4">
-                    <h3>Product 4</h3>
-                    <p>$19.99</p>
-                    
-                </div>
-                <!-- Add more products as needed -->
-            </div>
-        </section>
 
-        <section class="categories">
-            <h2>Shop by Category</h2>
-            <ul class="category-list">
-               
-                <!-- Add more categories as needed -->
-            </ul>
-        </section>
+    <main>
+        <h2>Our Products</h2>
+        <div class="product-list">
+            {% for product in ecom %}
+                <div class="product-item">
+                    <h3>{{ product.name }}</h3>
+                    <p>Brand: {{ product.brand }}</p>
+                    <p>Price: ${{ product.price }}</p>
+                    <p>Description: {{ product.description }}</p>
+                
+                </div>
+            {% empty %}
+                <p>No products available at the moment.</p>
+            {% endfor %}
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 E-commerce Store. All rights reserved.</p>
-        <ul>
-           
-        </ul>
+        <p>&copy; 2024 ECommerce Platform. All rights reserved.</p>
     </footer>
+
 </body>
 </html>

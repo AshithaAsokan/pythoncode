@@ -7,8 +7,8 @@ For more information on this file, see
 https://docs.djangoproject.com/en/4.2/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/4.2/ref/settings/
-"""
+https://docs.djangoproject.com/en/4.2/ref/settings/ """
+
 
 from pathlib import Path
 import os
@@ -68,6 +68,10 @@ DATABASES = {
         'HOST': "localhost",
     }
 }
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -89,8 +93,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# settings.py
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Your static files directory
+STATIC_ROOT = BASE_DIR / 'staticfiles'    # Directory to collect static files for deployment
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -100,7 +107,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
-LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = 'index'
 LOGIN_REDIRECT_URL = 'home'
 
 #add fancy template+
